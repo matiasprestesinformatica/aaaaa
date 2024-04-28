@@ -1,0 +1,33 @@
+<?php
+
+$lang = [
+    'mg_title' => 'Nachrichten',
+    'mg_sub_title' => 'Hier finden Sie alle Nachrichten, die auf dem Server gesendet wurden, sofern sie nicht gelöscht wurden.',
+    'mg_filter_by' => 'Nachrichten filtern',
+    'mg_filter_user' => 'Benutzernamen eingeben...',
+    'mg_filter_planet' => 'Betreff eingeben...',
+    'mg_filter_type' => 'Nachrichtentyp',
+    'mg_filter_content' => 'Inhalt oder Schlüsselwörter...',
+    'mg_filter_start_search' => 'Suchen',
+    'mg_search_results' => 'Suchergebnisse',
+    'mg_no_results' => 'Keine Nachrichten gefunden',
+    'mg_delete_selected' => 'Ausgewählte Nachrichten löschen',
+    'mg_sender' => 'Absender',
+    'mg_receiver' => 'Empfänger',
+    'mg_time' => 'Datum/Zeit',
+    'mg_type' => 'Typ',
+    'mg_from' => 'Von',
+    'mg_subject' => 'Betreff',
+    'mg_actions' => 'Aktionen',
+    'mg_the_message' => 'Nachrichteninhalt',
+    'mg_delete_this' => 'Diese Nachricht löschen',
+    'mg_delete_ok' => 'Nachrichten erfolgreich gelöscht',
+    'mg_types' => [
+        0 => 'Spionageberichte',
+        1 => 'Kampfberichte',
+        2 => 'Expeditionsberichte',
+        3 => 'Nachrichten von der Allianz',
+        4 => 'Nachrichten von Spielern',
+        5 => 'Andere Nachrichten',
+    ],
+];
