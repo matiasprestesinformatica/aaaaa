@@ -11,6 +11,16 @@ class FleetEntity extends Entity
         parent::__construct($data);
     }
 
+	/**
+     * Get the username
+     *
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->data['user_name'];
+    }
+	
     /**
      * Get the fleet id
      *

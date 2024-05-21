@@ -62,6 +62,28 @@ class Fleet extends Model
 
         return [];
     }
+	
+	/**
+     * Get all ally fleets by user id
+     *
+     * @param int $user_id User ID
+     *
+     * @return array
+     */
+    public function getAllAFleetsByUserId($user_id)
+    {
+        if ((int) $user_id > 0) {
+            return $this->db->queryFetchAll(
+                'SELECT ua.user_name, ua.user_id, f.*
+					FROM `' . USERS . '` u
+					JOIN `' . USERS . '` ua ON ua.user_ally_id = u.user_ally_id
+					JOIN `' . FLEETS . '` f ON f.fleet_owner = ua.user_id
+					WHERE u.user_id = ' . $user_id . ' AND ua.user_id <> u.user_id;'
+            );
+        }
+
+        return [];
+    }
 
     /**
      * Get ACS Data by group ID

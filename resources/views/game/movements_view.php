@@ -54,4 +54,52 @@
         </tr>
         {/list_of_movements}
     </table>
+	<table width="519" border="0" cellpadding="0" cellspacing="1">
+		<tr height="20">
+            <td colspan="9" class="c">
+                <table border="0" width="100%">
+                    <tr>
+                        <td style="background-color: transparent;" align="center">Flotten von Allianzmitgliedern</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+		<tr height="20">
+            <th>Spielername</th>
+            <th>{fl_mission}</th>
+            <th>{fl_ammount}</th>
+            <th>{fl_beginning}</th>
+            <th>{fl_departure}</th>
+            <th>{fl_destiny}</th>
+            <th>{fl_objective}</th>
+            <th>{fl_arrival}</th>
+        </tr>
+		{list_of_a_movements}
+        <tr height="20px">
+            <th>{a_user_name}</th>
+            <th>
+                <a>{a_fleet_mission}</a>
+                <a title="{tooltip}">{a_title}</a>
+            </th>
+            <th>
+                <a title="{fleet}">{a_fleet_amount}</a>
+            </th>
+            <th>
+                {a_fleet_start}
+            </th>
+            <th>
+                {a_fleet_start_time}
+            </th>
+            <th>
+                {a_fleet_end}
+            </th>
+            <th>
+                {a_fleet_end_time}
+            </th>
+            <th>
+                {a_fleet_arrival}
+            </th>
+        </tr>
+        {/list_of_a_movements}
+	</table>
 </div>

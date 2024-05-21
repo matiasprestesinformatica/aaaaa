@@ -25,6 +25,8 @@ class MovementController extends BaseController
     private ?Researches $research = null;
     private ?Premium $premium = null;
     private Fleet $fleetModel;
+	
+	private ?Fleets $a_fleets = null;
 
     public function __construct()
     {
@@ -64,6 +66,11 @@ class MovementController extends BaseController
     {
         $this->fleets = new Fleets(
             $this->fleetModel->getAllFleetsByUserId($this->user['user_id']),
+            $this->user['user_id']
+        );
+		
+		$this->a_fleets = new Fleets(
+            $this->fleetModel->getAllAFleetsByUserId($this->user['user_id']),
             $this->user['user_id']
         );
 
@@ -109,6 +116,7 @@ class MovementController extends BaseController
                 $this->research->getCurrentResearch()->getResearchAstrophysics()
             ),
             'list_of_movements' => $this->buildMovements(),
+			'list_of_a_movements' => $this->buildAMovements(),
         ];
 
         // display the page
@@ -176,6 +184,57 @@ class MovementController extends BaseController
         }
 
         return $list_of_movements;
+    }
+	
+	private function buildAMovements(): array
+    {
+        $list_of_a_movements[] = [
+            'a_user_name' => '-',
+            'a_fleet_mission' => '-',
+            'a_title' => '',
+            'a_fleet_amount' => '-',
+            'a_fleet_start' => '-',
+            'a_fleet_start_time' => '-',
+            'a_fleet_end' => '-',
+            'a_fleet_end_time' => '-',
+            'a_fleet_arrival' => '-',
+            'a_fleet_actions' => '-',
+        ];
+		
+		if ($this->a_fleets)
+        if ($this->a_fleets->getFleetsCount() > 0) {
+            // reset
+            unset($list_of_a_movements);
+
+            $fleet_count = 0;
+
+            foreach ($this->a_fleets->getFleets() as $fleet) {
+                $list_of_a_movements[] = [
+                    'a_user_name' => $fleet->getUserName(),
+                    'a_fleet_mission' => $this->langs->language['type_mission'][$fleet->getFleetMission()],
+                    'a_title' => $this->buildTitleBlock($fleet->getFleetMess()),
+                    'a_tooltip' => $this->buildToolTipBlock($fleet->getFleetMess()),
+                    'a_fleet_amount' => FormatLib::prettyNumber($fleet->getFleetAmount()),
+                    'a_fleet' => $this->buildShipsBlock($fleet->getFleetArray()),
+                    'a_fleet_start' => FormatLib::prettyCoords(
+                        $fleet->getFleetStartGalaxy(),
+                        $fleet->getFleetStartSystem(),
+                        $fleet->getFleetStartPlanet()
+                    ),
+                    'a_fleet_start_time' => Timing::formatExtendedDate($fleet->getFleetCreation()),
+                    'a_fleet_end' => FormatLib::prettyCoords(
+                        $fleet->getFleetEndGalaxy(),
+                        $fleet->getFleetEndSystem(),
+                        $fleet->getFleetEndPlanet()
+                    ),
+                    'a_fleet_end_time' => Timing::formatExtendedDate($fleet->getFleetStartTime()),
+                    'a_fleet_arrival' => Timing::formatExtendedDate($fleet->getFleetEndTime()),
+                    'a_fleet_actions' => $this->buildActionsBlock($fleet),
+                ];
+            }
+        }
+
+        return $list_of_a_movements;
     }
 
     /**
