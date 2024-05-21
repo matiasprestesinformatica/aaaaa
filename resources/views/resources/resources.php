@@ -32,14 +32,21 @@
                     <td class="k">{planet_crystal_max}</td>
                     <td class="k">{planet_deuterium_max}</td>
                     <td class="k">0</td>
+                </tr>
+				<tr>
+                    <th>{rs_minutly}</th>
+                    <th>{minutly_metal}</th>
+                    <th>{minutly_crystal}</th>
+                    <th>{minutly_deuterium}</th>
+                    <th>{energy_total}</th>
                 </tr><tr>
                     <th height="22">{rs_sum}</th>
                     <td class="k">{metal_total}</td>
                     <td class="k">{crystal_total}</td>
                     <td class="k">{deuterium_total}</td>
                     <td class="k">{energy_total}</td>
-                </tr>
-                <tr>
+                </tr>               
+				<tr>
                     <th>{rs_daily}</th>
                     <th>{daily_metal}</th>
                     <th>{daily_crystal}</th>

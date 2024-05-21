@@ -193,22 +193,28 @@ class ResourcesController extends BaseController
         $parse['crystal_total'] = FormatLib::colorNumber(FormatLib::prettyNumber(floor((($this->planet['planet_crystal_perhour'] * 0.01 * $parse['production_level']) + $parse['crystal_basic_income']))));
         $parse['deuterium_total'] = FormatLib::colorNumber(FormatLib::prettyNumber(floor((($this->planet['planet_deuterium_perhour'] * 0.01 * $parse['production_level']) + $parse['deuterium_basic_income']))));
         $parse['energy_total'] = FormatLib::colorNumber(FormatLib::prettyNumber(floor(($this->planet['planet_energy_max'] + $parse['energy_basic_income']) + $this->planet['planet_energy_used'])));
-
+		
+		$parse['minutly_metal'] = $this->calculate_minutly($this->planet['planet_metal_perhour'], $parse['production_level'], $parse['metal_basic_income']);
         $parse['daily_metal'] = $this->calculate_daily($this->planet['planet_metal_perhour'], $parse['production_level'], $parse['metal_basic_income']);
         $parse['weekly_metal'] = $this->calculate_weekly($this->planet['planet_metal_perhour'], $parse['production_level'], $parse['metal_basic_income']);
 
+		$parse['minutly_crystal'] = $this->calculate_minutly($this->planet['planet_crystal_perhour'], $parse['production_level'], $parse['crystal_basic_income']);
         $parse['daily_crystal'] = $this->calculate_daily($this->planet['planet_crystal_perhour'], $parse['production_level'], $parse['crystal_basic_income']);
         $parse['weekly_crystal'] = $this->calculate_weekly($this->planet['planet_crystal_perhour'], $parse['production_level'], $parse['crystal_basic_income']);
 
+		$parse['minutly_deuterium'] = $this->calculate_minutly($this->planet['planet_deuterium_perhour'], $parse['production_level'], $parse['deuterium_basic_income']);
         $parse['daily_deuterium'] = $this->calculate_daily($this->planet['planet_deuterium_perhour'], $parse['production_level'], $parse['deuterium_basic_income']);
         $parse['weekly_deuterium'] = $this->calculate_weekly($this->planet['planet_deuterium_perhour'], $parse['production_level'], $parse['deuterium_basic_income']);
 
+		$parse['minutly_metal'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['minutly_metal']));
         $parse['daily_metal'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['daily_metal']));
         $parse['weekly_metal'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['weekly_metal']));
 
+		$parse['minutly_crystal'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['minutly_crystal']));
         $parse['daily_crystal'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['daily_crystal']));
         $parse['weekly_crystal'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['weekly_crystal']));
 
+		$parse['minutly_deuterium'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['minutly_deuterium']));
         $parse['daily_deuterium'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['daily_deuterium']));
         $parse['weekly_deuterium'] = FormatLib::colorNumber(FormatLib::prettyNumber($parse['weekly_deuterium']));
 
@@ -266,6 +272,18 @@ class ResourcesController extends BaseController
         return $option_row;
     }
 
+	/**
+     * method calculate_minutly
+     * param1 $prod_per_hour
+     * param2 $prod_level
+     * param3 $basic_income
+     * return production per day
+     */
+	private function calculate_minutly($prod_per_hour, $prod_level, $basic_income)
+    {
+        return floor(($basic_income + ($prod_per_hour * 0.01 * $prod_level)) / 60);
+    }
+	
     /**
      * method calculate_daily
      * param1 $prod_per_hour
