@@ -82,8 +82,8 @@ class UsersController extends BaseController
                 $this->_user_query = $this->usersModel->getUserDataById($this->_id);
 
                 if($this->_user_query['user_authlevel'] > $this->user['user_authlevel']) {
-					die(Administration::noAccessMessage($this->langs->line('no_permissions')));
-				}
+			die(Administration::noAccessMessage($this->langs->line('no_permissions')));
+		}
 
                 // save the data
                 if (isset($_POST['send_data']) && $_POST['send_data']) {
