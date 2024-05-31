@@ -48,6 +48,7 @@ $lang = [
     'us_error_username' => 'Username empty on already taken',
     'us_error_email' => 'Email empty or already taken',
     'us_error_authlevel' => 'The user level can not be empty and must be between 0 and 3',
+    'us_error_authlevel_yourown' => 'You cannot change your user level on your own',
     'us_error_idplanet' => 'The planet can not be empty',
     'us_error_current_planet' => 'The current user planet can not be empty',
     'us_error_ally_id' => 'The user alliance can not be empty',
