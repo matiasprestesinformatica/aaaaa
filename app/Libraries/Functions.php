@@ -430,7 +430,7 @@ abstract class Functions
         $db = new Database();
 
         // set the user language reading the config file
-        if ($db != null && $db->testConnection() && !isset($_COOKIE['current_lang'])) {
+        if (!IN_INSTALL && $db != null && $db->testConnection() && !isset($_COOKIE['current_lang'])) {
             self::updateConfig('lang', $lang);
         }
 
