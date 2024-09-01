@@ -33,7 +33,7 @@ use Exception;
  */
 class PhysicShot
 {
-    private $fighters
+    private $fighters;
     private $shipType;
     private $damage;
     private $count;
