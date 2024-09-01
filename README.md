@@ -18,8 +18,8 @@ XG Proyect (XGP) is an OGame clone open-source web application framework designe
 
 ## Requirements
 
-PHP 7.4 or greater
-MySQLi 5.7 or greater
+- PHP 7.4 or greater
+- MySQLi 5.7 or greater
 
 ## How to get XG Proyect?
 
