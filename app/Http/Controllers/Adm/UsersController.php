@@ -81,6 +81,10 @@ class UsersController extends BaseController
                 // initial data
                 $this->_user_query = $this->usersModel->getUserDataById($this->_id);
 
+                if($this->_user_query['user_authlevel'] > $this->user['user_authlevel']) {
+                    die(Administration::noAccessMessage($this->langs->line('no_permissions')));
+                }
+
                 // save the data
                 if (isset($_POST['send_data']) && $_POST['send_data']) {
                     $this->saveData($type);
@@ -483,6 +487,14 @@ class UsersController extends BaseController
 
         if ($authlevel < 0 or $authlevel > 3) {
             $errors .= $this->langs->line('us_error_authlevel') . '<br />';
+        }
+
+        if ($authlevel != $this->user['user_authlevel'] && $this->user['user_id'] == $this->_user_query['user_id']) {
+            $errors .= $this->langs->line('us_error_authlevel_yourown') . '<br />';
+        }
+
+        if ($authlevel > $this->user['user_authlevel']) {
+            $errors .= $this->langs->line('us_error_invalid_auth_level') . '<br />';
         }
 
         if ($id_planet <= 0) {
@@ -1263,6 +1275,7 @@ class UsersController extends BaseController
         ];
 
         foreach ($roles as $role) {
+            if($this->user['user_authlevel'] < $role) continue;
             $roles_list[] = [
                 'role_id' => $role,
                 'role_sel' => ($role == $this->_user_query['user_authlevel'] ? 'selected' : ''),

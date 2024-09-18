@@ -27,7 +27,7 @@ XG Proyect (XGP) is an OGame clone open-source web application framework designe
 This is the simplest and easiest way if you're not a technical person. Download and install XG Proyect will be easy! ;)
 
  1. Go to [releases](https://github.com/XGProyect/XG-Proyect-v3.x.x/releases)
- 2. Look for the last version and then **assets** and finally look for the `.zip` file.
+ 2. Look for the last version and then **assets** and finally look for the `.zip` file
  3. Unzip the file, you'll see 2 files and 1 folder.
  4. Look for the contents of the `upload` folder, only what's inside this one is needed.
  5. Copy the contents of the `upload` folder to the root on your host. There are hidden files in it, be sure that those are copied over also, specially the `.htaccess` file.
