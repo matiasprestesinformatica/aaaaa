@@ -72,6 +72,7 @@ class InstallationController extends BaseController
 
         // ACTION FOR THE CURRENT PAGE
         $parse['alert'] = '';
+        $alerts = '';
 
         switch ((isset($_POST['page']) ? $_POST['page'] : '')) {
             case 'step1':
@@ -289,7 +290,7 @@ class InstallationController extends BaseController
      */
     private function serverRequirementes()
     {
-        return !(version_compare(PHP_VERSION, '7.3.0', '<'));
+        return !(version_compare(PHP_VERSION, '7.4.0', '<'));
     }
 
     /**
@@ -394,7 +395,7 @@ class InstallationController extends BaseController
      */
     private function writeConfigFile()
     {
-        $config_file = @fopen(XGP_ROOT . CONFIGS_PATH . 'config.php', 'w');
+        $config_file = fopen(XGP_ROOT . CONFIGS_PATH . 'config.php', 'w');
 
         if (!$config_file) {
             return false;
@@ -417,8 +418,8 @@ class InstallationController extends BaseController
         }
 
         // check if something was created and delete it
-        if (file_exists($config_file)) {
-            unlink($config_file);
+        if (file_exists(XGP_ROOT . CONFIGS_PATH . 'config.php')) {
+            unlink(XGP_ROOT . CONFIGS_PATH . 'config.php');
         }
 
         return false;
@@ -437,10 +438,6 @@ class InstallationController extends BaseController
         // get the database structure
         require_once XGP_ROOT . 'database' . DIRECTORY_SEPARATOR . 'database.php';
 
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $this->installationModel->setWindowsSqlMode();
-        }
-
         /**
          * Do table creations here...
          */
@@ -452,9 +449,6 @@ class InstallationController extends BaseController
             if ($status[$table] != 1) {
                 return false;
             }
-        }
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $this->installationModel->setNormalMode();
         }
 
         // ok!

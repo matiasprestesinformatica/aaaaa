@@ -61,20 +61,6 @@ class Installation extends Model
     }
 
     /**
-     * Set for windows sql mode to MYSQL40
-     *
-     * @return void
-     */
-    public function setWindowsSqlMode()
-    {
-        // Store the current sql_mode
-        $this->db->query('set @orig_mode = @@global.sql_mode');
-
-        // Set sql_mode to one that won't trigger errors...
-        $this->db->query('set @@global.sql_mode = "MYSQL40"');
-    }
-
-    /**
      * Run a simple insert query
      *
      * @param string $query Query
@@ -84,17 +70,6 @@ class Installation extends Model
     public function runSimpleQuery($query)
     {
         return $this->db->query($query);
-    }
-
-    /**
-     * Set for windows sql mode to normal
-     *
-     * @return void
-     */
-    public function setNormalMode()
-    {
-        // Change it back to original sql_mode
-        $this->db->query('set @@global.sql_mode = @orig_mode');
     }
 
     /**
